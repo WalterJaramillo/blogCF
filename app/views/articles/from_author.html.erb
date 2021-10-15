@@ -1,0 +1,6 @@
+<div class="large-container center-block">
+
+    <h1>Artículos publicados por <%= @user.email %></h1>  <!--current_user es quien inicio sesión y @user y en este caso es buscar un usuario dependiendo del id que nos hayan mandado-->
+    <%= render @user.articles %>  <!--ya sabemos que si al metodo render le pasamos una colección va a buscar el parcial apropiado, siempre y cuando sea una colección de articulos va a buscar el mosmo parcial sin importar de donde venga(@articles o en este caso @user.articles)-->
+
+</div>

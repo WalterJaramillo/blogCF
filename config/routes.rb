@@ -13,5 +13,7 @@ Rails.application.routes.draw do
   patch "/articles/:id", to: "articles#update", as: :article
   delete "/articles/:id", to: "articles#destroy"
 
+  get "articles/user/:user_id", to: "articles#from_author"   #esta ruta encuentra el autor
+
   get "articles", to: "articles#index" # el nombre index es arbitrario pero se recomienda dejarlo como index
 end

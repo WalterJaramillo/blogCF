@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
     # CRUD => Crear, Leer, Actualizar,Eliminar
     #before_action :find_article, only: [:show,:edit,:update,:destroy]
-    before_action :find_article, except: [:new,:create,:index]
+    before_action :find_article, except: [:new,:create,:index,:from_author]
     before_action :authenticate_user!, only: [:new,:create,:edit,:update,:destroy] # show e index no necesitan estar logueados
     #after_action :method     se ve menos 
 
@@ -18,9 +18,16 @@ class ArticlesController < ApplicationController
 
     def create   #create recibe el formulario de new con sus parametros nuevos y lo crea
         #Article.create(title: 'mi primer articulo')
-        @article = Article.create(title: params[:article][:title],           #create es un metodo de clase
-                                  content: params[:article][:content])
-        render json: @article
+        #@article = Article.create(title: params[:article][:title],           #create es un metodo de clase
+                                  #content: params[:article][:content])
+                                  #user:  current_user)    #esto hace referencia automaticamente al usuario que inicio sesión y sabemos que es seguro por que ya debe haber un usurio logueado y asi se guardara solo una vez en db
+        #@article.user = current.user # esta podria se una forma de guardar el id del usuario que hace el articulo pero se estaria creando el articulo 2 veces
+        #@article.save
+        @article = current_user.articles.create(title: params[:article][:title],           #esto creara un articulo para el usuario creado, entonces ya no tendremos que asignar la propiedad user_id, sino que rails la va asignar por si mismo
+                                    content: params[:article][:content])
+        #render json: @article
+
+        redirect_to @article  #despues de crearlo lo envia la vista show ya no en json
     end
 
     def show
@@ -46,6 +53,10 @@ class ArticlesController < ApplicationController
         #@article = Article.find(params[:id])
         @article.destroy
         redirect_to root_path
+    end
+
+    def from_author
+        @user = User.find(params[:user_id])
     end
 
     def find_article

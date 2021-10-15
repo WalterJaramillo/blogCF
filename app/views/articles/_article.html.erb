@@ -1,6 +1,6 @@
 
     <div class="card padding margin-top">
-        <h3 class="text-upperecase"><%= article.title%></h3>    <!--importante que el article no va con el @ yel parcial debe llamarce con el nombre del modelo en minuscula sino no funcionara, por que lo que hacer rails es pasarla como una variable local al parcial, TODO ESTO ES CONVERCIÓN-->
+        <h3 class="text-upperecase"><%= article.title%></h3>    <!--importante que el article no va con el @ y el parcial debe llamarce con el nombre del modelo en minuscula sino no funcionara, por que lo que hacer rails es pasarla como una variable local al parcial, TODO ESTO ES CONVERCIÓN-->
         <p class="text-secondary"><%= article.created_at%></p>
         <%= link_to "Ver más", article %>
     </div>
