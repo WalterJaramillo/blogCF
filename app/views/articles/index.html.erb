@@ -1,0 +1,12 @@
+<!-- render "partials/nav" Auque esto muestra el nav no es lo mas recomendado ya que es algo que se repite en todo lado deberia ir el layout-->
+<div class="large-container center-block">
+
+    <h1>Mis artículos</h1>
+    <%= render @articles %> <!--le paso el nombre de la colección y en base a eso rails sabe que que el parcial _article.html.erb y que tiene qque
+    mostrar ese parcial por cada uno de los elementos de @artiles ya no tenemos que iterar con each solo la separo en un archivo que separado 
+    que pueda reutilizar cada vez que quiera mostrar un articulo-->
+
+
+    <!--La convención aqui es buscar en la carpeta de las vistas para el modelo en este caso @articles en plurar un archivo que se llame igual que el 
+    modelo en minuscula con el _bajo  por supuesto y mostrar ese parcial-->
+</div>

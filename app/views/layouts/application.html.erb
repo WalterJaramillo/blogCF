@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> <!--Esta es la base de cualquire vista de rails-->
 <html>
   <head>
     <title>MyBlog</title>
@@ -6,10 +6,21 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload' %> 
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+   
+    
+    
   </head>
 
   <body>
-    <%= yield %>
+   <% if notice %>  <!-- if true  -->
+    <p class="alert alert-primary"><%= notice %></p>
+  <% end %>
+  <% if alert %>  <!-- if true  -->
+    <p class="alert alert-danger"><%= alert %></p>
+  <% end %>
+    <%= render "partials/nav"%>
+    <%= yield %> <!--Esto es lo unico que cambia o es variable, en lugar de yield se sustituye cada una de las vistas que tenemos se inserta dentro de yield todo lo demas se comparte en todas la vistas-->
   </body>
 </html>

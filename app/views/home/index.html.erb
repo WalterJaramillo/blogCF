@@ -1,0 +1,5 @@
+<h1><%=current_user.email%></h1>  <!--Cualquier propiedad del modelo  | y apartir del objeto current_user desde cualquier parte de la vista y de los controladores se podemos accedar a toda la información del usuario  si tratamos de acceder a user.email sin estar logueado sale un error undefined method email y lo solucionamos con  before_action :authenticate_user!-->
+
+
+<%= link_to "Inicio", root_path %>
+
