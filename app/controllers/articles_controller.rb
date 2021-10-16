@@ -23,9 +23,12 @@ class ArticlesController < ApplicationController
                                   #user:  current_user)    #esto hace referencia automaticamente al usuario que inicio sesión y sabemos que es seguro por que ya debe haber un usurio logueado y asi se guardara solo una vez en db
         #@article.user = current.user # esta podria se una forma de guardar el id del usuario que hace el articulo pero se estaria creando el articulo 2 veces
         #@article.save
-        @article = current_user.articles.create(title: params[:article][:title],           #esto creara un articulo para el usuario creado, entonces ya no tendremos que asignar la propiedad user_id, sino que rails la va asignar por si mismo
-                                    content: params[:article][:content])
+
+        #@article = current_user.articles.create(title: params[:article][:title],           #esto creara un articulo para el usuario creado, entonces ya no tendremos que asignar la propiedad user_id, sino que rails la va asignar por si mismo
+                                    #content: params[:article][:content])
         #render json: @article
+
+        @article = current_user.articles.create(article_params)
 
         redirect_to @article  #despues de crearlo lo envia la vista show ya no en json
     end
@@ -44,9 +47,13 @@ class ArticlesController < ApplicationController
 
     def update   #update recibie el formulario de edit con sus parametros para actualizar y lo actualiza  | update y create son muy parecidos, la unica diferencia es que utiliza el metodo update
         #@article = Article.find(params[:id])                                #update es un metodo de objeto
-        @article.update(title: params[:article][:title],      
-                        content: params[:article][:content])
-        render json: @article
+        #@article.update(title: params[:article][:title],        #que obtengo yo al decir params[:article] un hash que necesita update para actualizar mi articulo, con el mismo formato: "article"=>{"title"=>"Test", "content"=>"Demo"} la clave con la columna(title) y el valor(Test)
+                        #content: params[:article][:content])    #params[:article]  con esto agarramos cualuquier parametro que nos manden incluidos los que puediera enviar la persona maliciosa, entonces saldra un error forbiden y para solucioar esto se usan los parametros fuertes
+
+        #render json: @article
+        @article.update(article_params)
+        redirect_to @article
+
     end
 
     def destroy
@@ -62,5 +69,9 @@ class ArticlesController < ApplicationController
     def find_article
         #puts "estoy en find article"
         @article = Article.find(params[:id])
+    end
+
+    def article_params # cuando quiera permitir otro parametro solo se edita aqui y no hay que estar cambiando uno por uno
+        params.require(:article).permit(:title, :content)  # sobre el parametro :article que nos da un hash le diremos que atributos estan permitidos, proceso:  ruta, formulario envia a controlador y genera un parametro :article con un hash que le debemos decir cuales aceptar y cuales no
     end
 end

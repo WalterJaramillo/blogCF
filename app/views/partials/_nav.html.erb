@@ -3,13 +3,13 @@
         <%= link_to "Inicio", root_path, class:"nav-link" %>
     </li>
     <li class="nav-item">
-        <!--<%= link_to "Artículos", articles_new_path, class:"nav-link" %>-->
+        <!--<%= link_to "Artículos", articles_path, class:"nav-link" %>-->
         <%= link_to "Artículos", articles_path, class:"nav-link" %> <!--articles es la ruta index metodo get-->
     </li>
-    <li class="nav-item">
-        <%= link_to "Escribir", articles_new_path, class:"nav-link" %>
-    </li>
     <% if user_signed_in? %>  <!--Usuario esta logueado? true  || false      | podemos usar este metodo desde cualquier parte de la vista y desde el controlador tambien esta en todos los controladores-->
+        <li class="nav-item">
+            <%= link_to "Escribir", new_article_path, class:"nav-link" %>
+        </li>
         <li class="nav-item">
             <%= link_to "Cerrar sesión", destroy_user_session_path, method: :delete, class:"nav-link" %>
         </li>
