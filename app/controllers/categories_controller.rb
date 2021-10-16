@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!, only: [:new,:create,:edit,:update,:destroy] # show e index no necesitan estar logueados
 
   # GET /categories or /categories.json
   def index

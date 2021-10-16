@@ -66,6 +66,7 @@ class ArticlesController < ApplicationController
         @user = User.find(params[:user_id])
     end
 
+    private
     def find_article
         #puts "estoy en find article"
         @article = Article.find(params[:id])
