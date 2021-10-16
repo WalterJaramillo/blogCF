@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
+  resources :categories
   #la base de una aplicación en rails es REST, REST es la arquitectura del proyecto ademas del MVC que son arquitecturas distintas es decir enfrentar problemas distintos
   # Rest es mas como se organizan las rutas, los controladores y como se tiene que ver con el modelo de
   # y el MVC Es mas como organizar el codigo, nuestro proyecto esta pensado en rest es decir que pasarlo a REST de ruby on rails va hacer muy facil
   #ahora ya estamos usando REST solo que no es explicito y esto nos va ahorrar mucho codigo con "resources"
-  # lo mas recomendable es respetar arquitectura rest
+  # lo mas recomendable es respetar arquitectura rest tanto como se posible
 
   devise_for :users
   root to: "home#index"
