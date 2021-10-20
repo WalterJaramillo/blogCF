@@ -6,9 +6,22 @@
     </div>
 
     <div class="field">
+        <%=form.label :category_elements  %>
+        <div class="row">
+            <% @categories.each do |category| %>
+                <label class="col-6 col-ms-4">
+                    <%= form.check_box :category_elements, {multiple: true}, category.id, nil%> <!--esto ya es un arreglo no en string-->
+                    <%= category.title%>
+                </label>
+            <% end %>
+        </div>
+        <%# 1,2  con esto busco poner un atributo al articulo que guarde la categoria %>
+    </div>
+
+    <!--<div class="field">
         <%=form.label :status %>
         <%=form.number_field :status %>
-    </div>
+    </div>-->
 
     <div class="field">
         <%=form.label :content %>
@@ -20,3 +33,5 @@
     </div>
 
 <% end %>
+
+

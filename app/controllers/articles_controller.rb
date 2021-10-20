@@ -12,6 +12,7 @@ class ArticlesController < ApplicationController
     def new
         @article = Article.new
         #@article.title = "algo"      esta variable la envio a la vista new, como title tiene algo lo pinta en la vista
+        @categories = Category.all
     end
 
     
@@ -28,8 +29,11 @@ class ArticlesController < ApplicationController
                                     #content: params[:article][:content])
         #render json: @article
 
+        
         @article = current_user.articles.create(article_params)
-
+        
+        #@article.category_elements
+        @article.save_categories   # esto es un metodo el modelo Article
         redirect_to @article  #despues de crearlo lo envia la vista show ya no en json
     end
 
@@ -43,6 +47,7 @@ class ArticlesController < ApplicationController
         #puts "\n\n\n #{@article.persisted?} \n\n\n"    esto muestra falso que significa que no esta en la db
         #@article = Article.find(params[:id])    #objeto lleno cuando le paso un parametro ejempo /articles/2
         #puts "\n\n\n #{@article.persisted?} \n\n\n"  #true
+        @categories = Category.all
     end
 
     def update   #update recibie el formulario de edit con sus parametros para actualizar y lo actualiza  | update y create son muy parecidos, la unica diferencia es que utiliza el metodo update
@@ -52,6 +57,7 @@ class ArticlesController < ApplicationController
 
         #render json: @article
         @article.update(article_params)
+        @article.save_categories 
         redirect_to @article
 
     end
@@ -73,6 +79,6 @@ class ArticlesController < ApplicationController
     end
 
     def article_params # cuando quiera permitir otro parametro solo se edita aqui y no hay que estar cambiando uno por uno
-        params.require(:article).permit(:title, :content)  # sobre el parametro :article que nos da un hash le diremos que atributos estan permitidos, proceso:  ruta, formulario envia a controlador y genera un parametro :article con un hash que le debemos decir cuales aceptar y cuales no
-    end
+        params.require(:article).permit(:title, :content, category_elements: [])  # sobre el parametro :article que nos da un hash le diremos que atributos estan permitidos, proceso:  ruta, formulario envia a controlador y genera un parametro :article con un hash que le debemos decir cuales aceptar y cuales no
+    end                                   #elementos que vienen del formulario
 end
