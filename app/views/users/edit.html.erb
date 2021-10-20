@@ -1,0 +1,16 @@
+<div class="small-container center-block">
+    <p class="font-weight-bold text-upperecase margin-top">Editar usuario</p>
+
+    <%= image_tag url_for(current_user.avatar), height:200 %>  <!--url for es un metodo de las vistas al cual le podemos pasar el registro del archivo y nos va a dar una dirección que apunta hacia ese archivo.-->
+
+    <%= form_with(model: current_user, local:true) do |form| %>
+        <div class="field">
+            <%= form.label :avatar%>  <!--Atributo donde se guarda la imagen-->
+            <%= form.file_field :avatar%>
+        </div>
+
+        <div class="field">
+            <%= form.submit "Guardar", class:"btn btn-primary" %>
+        </div>
+    <% end %>
+</div>

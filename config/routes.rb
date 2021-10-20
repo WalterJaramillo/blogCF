@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  
   resources :categories
   #la base de una aplicación en rails es REST, REST es la arquitectura del proyecto ademas del MVC que son arquitecturas distintas es decir enfrentar problemas distintos
   # Rest es mas como se organizan las rutas, los controladores y como se tiene que ver con el modelo de
@@ -9,8 +10,10 @@ Rails.application.routes.draw do
 
   devise_for :users
   root to: "home#index"
+  get "perfil", to:"users#edit"
   get "bienvenida", to: "home#index" #esto no es rest es solo una ruta de un landing pague no es un ruta que estamos modificando  | NO ES UN CRUD 
   
+  resources :users, only: [:update]   #patch "/users/:id", to: "users#update", as: :user
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   #resources :articles          #al poner esto ya comento lo de abajo, solo esto hace todo lo de abajo TODO ES LO MISMO
 
